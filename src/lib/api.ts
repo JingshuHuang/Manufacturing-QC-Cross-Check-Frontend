@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   Session,
   UploadedFile,
@@ -7,14 +7,14 @@ import {
   WorkflowStatus,
   FileUploadResponse,
   SessionListResponse,
-} from '@/types/api';
+} from "@/types/api";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const api = axios.create({
   baseURL: `${API_BASE_URL}/api/v1`,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -25,7 +25,7 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.error('Request error:', error);
+    console.error("Request error:", error);
     return Promise.reject(error);
   }
 );
@@ -37,7 +37,11 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error('Response error:', error.response?.status, error.response?.data);
+    console.error(
+      "Response error:",
+      error.response?.status,
+      error.response?.data
+    );
     return Promise.reject(error);
   }
 );
@@ -45,7 +49,7 @@ api.interceptors.response.use(
 // Session API
 export const sessionApi = {
   create: async (): Promise<Session> => {
-    const response = await api.post('/sessions/', {});
+    const response = await api.post("/sessions/", {});
     return response.data;
   },
 
@@ -66,15 +70,18 @@ export const sessionApi = {
 
 // File API
 export const fileApi = {
-  upload: async (sessionId: string, files: File[]): Promise<FileUploadResponse[]> => {
+  upload: async (
+    sessionId: string,
+    files: File[]
+  ): Promise<FileUploadResponse[]> => {
     const formData = new FormData();
     files.forEach((file) => {
-      formData.append('files', file);
+      formData.append("files", file);
     });
 
     const response = await api.post(`/files/upload/${sessionId}`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
     return response.data;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, Trash2, Plus, RefreshCw } from "lucide-react";
+import { Eye, Plus, RefreshCw } from "lucide-react";
 import { useSessionStore } from "@/stores/sessionStore";
 import { formatDate } from "@/lib/utils";
 import StatusBadge from "@/components/StatusBadge";

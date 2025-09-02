@@ -17,7 +17,6 @@ interface ValidationResultCardProps {
 
 const ValidationResultCard: React.FC<ValidationResultCardProps> = ({
   result,
-  showDetails = true,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
